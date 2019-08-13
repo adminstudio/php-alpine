@@ -36,4 +36,5 @@ RUN curl --silent --fail --location --retry 3 --output /tmp/installer.php --url 
  && rm -f /tmp/installer.php \
  && find /tmp -type d -exec chmod -v 1777 {} +
 RUN apk add bash \
-            sshpass
+            sshpass \
+            git

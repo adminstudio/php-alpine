@@ -1,6 +1,8 @@
 FROM php:7.2-alpine
 LABEL Maintainer="Asdrubal Gonzalez <agpenton@gmail.com"
-RUN apk --update add wget curl git php php-curl php-openssl php-json php-phar php-dom bash sshpass git openssh-client rsync && rm /var/cache/apk/* && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN apk --update add wget curl git php php-curl php-openssl php-json php-phar php-dom libsodium-dev libpng-dev zlib-dev libxml2-dev icu-dev g++ bash sshpass git openssh-client rsync && rm /var/cache/apk/* && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
+RUN docker-php-ext-install mbstring zip gd bcmath soap sodium
 CMD ["/bin/sh"]
 
 ENTRYPOINT ["/bin/sh", "-c"]

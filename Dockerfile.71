@@ -1,8 +1,8 @@
 FROM php:7.1-alpine
 LABEL Maintainer="Asdrubal Gonzalez <agpenton@gmail.com"
-RUN apk --update add wget curl git php php-curl php-openssl php-json php-phar php-dom libsodium-dev libxslt-dev libpng-dev zlib-dev libxml2-dev icu-dev g++ bash sshpass git openssh-client rsync && rm /var/cache/apk/* && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
+RUN apk --update add wget curl git php php-curl php-openssl php-json php-phar php-dom libsodium-dev libxslt-dev libpng-dev zlib-dev libxml2-dev icu-dev g++ libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf bash sshpass git openssh-client rsync && rm /var/cache/apk/* && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
 RUN docker-php-ext-configure intl && docker-php-ext-install intl
-RUN pecl install redis libsodium && docker-php-ext-enable redis sodium
+RUN docker-php-source extract && pecl install redis libsodium && docker-php-ext-enable redis sodium
 RUN docker-php-ext-install mbstring zip gd bcmath soap sodium pdo_mysql mysqli pcntl xsl
 RUN apk add	 --no-cache libmcrypt-dev && docker-php-ext-configure mcrypt --with-mcrypt && docker-php-ext-install mcrypt
 CMD ["/bin/sh"]

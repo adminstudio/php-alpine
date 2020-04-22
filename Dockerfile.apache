@@ -38,7 +38,7 @@ RUN apk --no-cache add \
         php7-zlib \
 		libsodium-dev libxslt-dev libpng-dev zlib-dev libxml2-dev icu-dev g++ libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf bash sshpass git openssh-client rsync curl wget 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && curl -LO https://deployer.org/deployer.phar && mv deployer.phar /usr/local/bin/dep && chmod +x /usr/local/bin/dep
-RUN set -x \
+#RUN set -x \
     && addgroup -g 82 -S www-data \
     && adduser -u 82 -D -S -G www-data www-data \
 	&& php -m
